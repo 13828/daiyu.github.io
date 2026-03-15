@@ -2,222 +2,261 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>表白</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>超浪漫表白</title>
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-body{
-background:#ffeff5;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-font-family:"微软雅黑";
-overflow:hidden;
-}
-h1{
-font-size:40px;
-color:#ff5e97;
-margin-bottom:25px;
-}
-.btn{
-padding:6px 16px;
-font-size:15px;
-border:none;
-border-radius:18px;
-background:#ff5e97;
-color:#fff;
-cursor:pointer;
-margin:6px;
-transition:0.2s;
-}
-#yes{
-background:linear-gradient(90deg,#ff66a1,#ff3377);
-box-shadow:0 0 10px rgba(255,90,150,0.5);
-}
-.btn:hover{
-transform:scale(1.1);
-}
+  /* 全局重置与基础样式 */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-/* 初始飘落动画 */
-.flower{
-position:absolute;
-top:-50px;
-z-index:-1;
-animation:fall linear forwards;
-}
-.heart{
-position:absolute;
-top:-50px;
-z-index:-1;
-animation:fall linear forwards;
-}
-@keyframes fall{
-to{transform:translateY(105vh);opacity:0;}
-}
+  /* 定义CSS变量，方便统一修改 */
+  :root {
+    --primary-color: #ff5e97;
+    --primary-gradient: linear-gradient(90deg, #ff66a1, #ff3377);
+    --bg-color: #ffeff5;
+    --shadow-color: rgba(255, 90, 150, 0.5);
+    --transition-time: 0.2s;
+  }
 
-/* 成功页样式 */
-.success-page body{
-background: linear-gradient(to top, #ff9bbb, #ffc3d9);
-}
-.box{
-background:white;
-padding:40px 30px;
-border-radius:30px;
-text-align:center;
-box-shadow:0 15px 30px rgba(0,0,0,0.15);
-max-width:90vw;
-max-height:90vh;
-overflow-y:auto;
-}
-.title{
-font-size:42px;
-color:#ff3366;
-font-weight:bold;
-margin-bottom:20px;
-}
-.btn-real{
-margin-top:20px;
-padding:10px 25px;
-background:#ff6699;
-color:white;
-border:none;
-border-radius:20px;
-font-size:18px;
-cursor:pointer;
-}
-.love-text{
-margin-top:25px;
-font-size:20px;
-color:#ff5e97;
-display:none;
-line-height:1.6;
-text-align:left;
-white-space: pre-line;
-}
-.fall{
-position:absolute;
-top:-60px;
-z-index:1;
-animation: fallSlow linear forwards;
-}
-@keyframes fallSlow{
-0%{transform:translateY(0) rotate(0deg);opacity:1;}
-100%{transform:translateY(105vh) rotate(360deg);opacity:0;}
-}
+  body {
+    font-family: "微软雅黑", sans-serif;
+    background: var(--bg-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 初始页面样式 */
+  h1 {
+    font-size: clamp(28px, 5vw, 40px); /* 响应式字体 */
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 15px;
+  }
+
+  .btn {
+    padding: 8px 20px;
+    font-size: clamp(14px, 3vw, 15px);
+    border: none;
+    border-radius: 18px;
+    background: var(--primary-color);
+    color: #fff;
+    cursor: pointer;
+    transition: transform var(--transition-time) ease, box-shadow var(--transition-time) ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+
+  #yes {
+    background: var(--primary-gradient);
+    box-shadow: 0 0 12px var(--shadow-color);
+  }
+
+  #no {
+    background: #f8f8f8;
+    color: #666;
+  }
+
+  /* 飘落元素基础样式 */
+  .falling {
+    position: absolute;
+    top: -60px;
+    z-index: 1;
+    animation: fall linear forwards;
+  }
+
+  /* 动画关键帧 */
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* 成功页面样式 */
+  .success-container {
+    background: linear-gradient(to top, #ff9bbb, #ffc3d9);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .card {
+    background: white;
+    padding: 30px 25px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    max-width: 90vw;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .heart-icon {
+    font-size: clamp(50px, 15vw, 70px);
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: clamp(32px, 8vw, 42px);
+    color: #ff3366;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .btn-real {
+    margin-top: 20px;
+    padding: 10px 25px;
+    background: #ff6699;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: clamp(16px, 4vw, 18px);
+    cursor: pointer;
+    transition: transform var(--transition-time) ease;
+  }
+
+  .btn-real:hover {
+    transform: scale(1.05);
+  }
+
+  .love-text {
+    margin-top: 25px;
+    font-size: clamp(16px, 3vw, 20px);
+    color: #ff5e97;
+    display: none;
+    line-height: 1.7;
+    text-align: left;
+    white-space: pre-line;
+    text-indent: 2em;
+  }
 </style>
 </head>
-<body class="main-page">
-<div id="main-content">
-  <h1>我喜欢你，做我对象好不好？</h1>
-  <div>
+<body>
+  <!-- 初始表白页面 -->
+  <h1 id="question">我喜欢你，做我对象好不好？</h1>
+  <div class="btn-group">
     <button class="btn" id="yes">好呀</button>
     <button class="btn" id="no">不要</button>
   </div>
-</div>
 
-<div id="success-content" style="display:none;">
-  <div class="box">
-    <div class="title">我也超级喜欢你</div>
-    <button class="btn-real" id="realBtn">真的吗？</button>
-    <div class="love-text" id="loveText">
-遇见你之前，我从没想过会有人让我如此心动，遇见你之后，我只想牵着你的手走完余生。
-你是我清晨的第一缕阳光，也是我夜晚最温柔的梦。
-我想申请做你生命里的常驻居民，房租就用我的笑容和关心来付。
-因为听说喜欢一个人会让智商下降，可我愿意为你降到负数。
-而且这份喜欢不是一时冲动，是每天见到你都会更确定一次。
-所以我不想只做朋友，我想参与你未来的每一个故事。
+  <script>
+    let flowerTimer, heartTimer;
+    const body = document.body;
+    const question = document.getElementById('question');
+    const btnGroup = document.querySelector('.btn-group');
 
-爱你
-    </div>
-  </div>
-</div>
+    // 获取DOM元素并绑定事件
+    const yesBtn = document.getElementById('yes');
+    const noBtn = document.getElementById('no');
 
-<script>
-let flowerTimer, heartTimer;
+    yesBtn.onclick = handleYesClick;
+    noBtn.onclick = handleNoClick;
 
-// 初始飘落动画
-function createFlower(){
-  let flower = document.createElement('div');
-  flower.innerHTML = '🌸';
-  flower.className = 'flower';
-  flower.style.left = Math.random()*100+'vw';
-  flower.style.fontSize=Math.random()*15+10+'px';
-  flower.style.animationDuration=Math.random()*3+4+'s';
-  document.body.appendChild(flower);
-  setTimeout(()=>flower.remove(),7000);
-}
-flowerTimer = setInterval(createFlower,300);
+    // 点击"好呀"的处理逻辑
+    function handleYesClick() {
+      // 清理定时器和飘落元素
+      clearInterval(flowerTimer);
+      clearInterval(heartTimer);
+      document.querySelectorAll('.falling').forEach(item => item.remove());
 
-function createHeart(){
-  let heart = document.createElement('div');
-  heart.innerHTML = '❤️';
-  heart.className = 'heart';
-  heart.style.left = Math.random()*100+'vw';
-  heart.style.fontSize=Math.random()*18+12+'px';
-  heart.style.animationDuration=Math.random()*3+4+'s';
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-}
-heartTimer = setInterval(createHeart,200);
+      // 隐藏初始页面元素
+      question.style.display = 'none';
+      btnGroup.style.display = 'none';
 
-// 点「好呀」切换到成功页
-document.getElementById('yes').onclick = function(){
-  clearInterval(flowerTimer);
-  clearInterval(heartTimer);
-  document.querySelectorAll('.flower,.heart').forEach(item => item.remove());
+      // 构建成功页面HTML
+      const successHTML = `
+        <div class="success-container">
+          <div class="card">
+            <div class="heart-icon">❤️</div>
+            <div class="title">我也超级喜欢你</div>
+            <button class="btn-real" id="realBtn">真的吗？</button>
+            <div class="love-text" id="loveText">
+  遇见你之前，我从没想过会有人让我如此心动，遇见你之后，我只想牵着你的手走完余生。
+  你是我清晨的第一缕阳光，也是我夜晚最温柔的梦。
+  我想申请做你生命里的常驻居民，房租就用我的笑容和关心来付。
+  因为听说喜欢一个人会让智商下降，可我愿意为你降到负数。
+  而且这份喜欢不是一时冲动，是每天见到你都会更确定一次。
+  所以我不想只做朋友，我想参与你未来的每一个故事。
   
-  document.getElementById('main-content').style.display = 'none';
-  document.getElementById('success-content').style.display = 'flex';
-  document.body.style.justifyContent = 'center';
-  document.body.style.background = 'linear-gradient(to top, #ff9bbb, #ffc3d9)';
+  爱你
+            </div>
+          </div>
+        </div>
+      `;
 
-  // 成功页飘落动画
-  setInterval(()=>{
-    let h = document.createElement('div');
-    h.className='fall';
-    h.innerHTML='❤️';
-    h.style.position='absolute';
-    h.style.top='-60px';
-    h.style.left=Math.random()*100+'vw';
-    h.style.fontSize='20px';
-    h.style.zIndex='1';
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),8000);
-  },220);
+      // 替换页面内容
+      body.innerHTML = successHTML;
 
-  setInterval(()=>{
-    let f = document.createElement('div');
-    f.className='fall';
-    f.innerHTML='🌸';
-    f.style.position='absolute';
-    f.style.top='-60px';
-    f.style.left=Math.random()*100+'vw';
-    f.style.fontSize='18px';
-    f.style.zIndex='1';
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),9000);
-  },320);
+      // 绑定成功页面的事件
+      document.getElementById('realBtn').onclick = showLoveText;
 
-  // 点「真的吗」按钮消失 + 显示文字
-  setTimeout(()=>{
-    document.getElementById('realBtn').onclick=function(){
-      this.style.display = 'none';
-      document.getElementById('loveText').style.display='block';
+      // 开始飘落动画
+      startFallingAnimations();
     }
-  },100);
-}
 
-// 点「不要」乱跑
-document.getElementById('no').onclick = function(){
-  this.style.position='absolute';
-  this.style.left=Math.random()*(window.innerWidth-100)+'px';
-  this.style.top=Math.random()*(window.innerHeight-50)+'px';
-};
-</script>
+    // 点击"不要"的处理逻辑（按钮跟随鼠标移动）
+    function handleNoClick() {
+      noBtn.style.position = 'absolute';
+      // 确保按钮不会移出可视区域
+      const maxLeft = window.innerWidth - noBtn.offsetWidth;
+      const maxTop = window.innerHeight - noBtn.offsetHeight;
+      noBtn.style.left = `${Math.random() * maxLeft}px`;
+      noBtn.style.top = `${Math.random() * maxTop}px`;
+    }
+
+    // 显示表白文字
+    function showLoveText() {
+      this.style.display = 'none';
+      document.getElementById('loveText').style.display = 'block';
+    }
+
+    // 创建飘落元素
+    function createFallingElement(type, intervalTime) {
+      return setInterval(() => {
+        const elem = document.createElement('div');
+        elem.className = 'falling';
+        elem.innerHTML = type === 'heart' ? '❤️' : '🌸';
+        elem.style.left = `${Math.random() * 100}vw`;
+        elem.style.fontSize = `${Math.random() * 15 + (type === 'heart' ? 12 : 10)}px`;
+        elem.style.animationDuration = `${Math.random() * 3 + 4}s`;
+        body.appendChild(elem);
+        // 定时移除元素，避免内存泄漏
+        setTimeout(() => elem.remove(), 7000);
+      }, intervalTime);
+    }
+
+    // 启动飘落动画
+    function startFallingAnimations() {
+      flowerTimer = createFallingElement('flower', 300);
+      heartTimer = createFallingElement('heart', 220);
+    }
+
+    // 窗口大小改变时，重新定位"不要"按钮（可选）
+    window.addEventListener('resize', () => {
+      if (noBtn.style.position === 'absolute') {
+        handleNoClick();
+      }
+    });
+  </script>
 </body>
 </html>
